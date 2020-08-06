@@ -30,12 +30,7 @@ class CommentItem extends Bitrix24Entity
 	 */
 	public function getList($taskId, $order, $filter)
 	{
-		$result = $this->client->call('task.commentitem.getmanifest',
-			array(
-			'TASKID' => $taskId,
-			'ORDER' => $order,
-			'FILTER'=> $filter
-		));
+		$result = $this->client->call('task.commentitem.getlist', array($taskId, $order, $filter));
 		return $result;
 	}
 
@@ -65,7 +60,11 @@ class CommentItem extends Bitrix24Entity
 	 */
 	public function add($taskId, $fields)
 	{
-		$result = $this->client->call('task.commentitem.add', array($taskId, array($fields)));
+		$result = $this->client->call('task.commentitem.add', 
+			array(
+				'TASKID' => $taskId,
+				'arFields' => $fields
+			));
 		return $result;
 	}
 
